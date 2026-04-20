@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("xslt_GUI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+95aa40773dc8e11c113f12ffffa991da87224dc6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b460ccc5430ab0cf10885833b737c4defb8c6452")]
 [assembly: System.Reflection.AssemblyProductAttribute("xslt_GUI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("xslt_GUI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
