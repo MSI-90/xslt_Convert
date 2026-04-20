@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System.Globalization;
+using System.IO;
 using System.Windows;
 using System.Xml.Linq;
 using System.Xml.Xsl;
@@ -20,18 +21,32 @@ namespace xslt_GUI
     {
       try
       {
-        // 1. XSLT преобразование
+        string inputFile = filePathTextBox.Text.Trim();
+
+        if (!File.Exists(inputFile))
+        {
+          MessageBox.Show($"Файл не найден:\n{inputFile}", "Ошибка",
+              MessageBoxButton.OK, MessageBoxImage.Warning);
+          return;
+        }
+
+        if (!File.Exists("transform.xslt"))
+        {
+          MessageBox.Show("Файл transform.xslt не найден!", "Ошибка",
+              MessageBoxButton.OK, MessageBoxImage.Warning);
+          return;
+        }
+
+        // 1. XSLT
         var xslt = new XslCompiledTransform();
         xslt.Load("transform.xslt");
-        xslt.Transform("Data1.xml", "Employees.xml");
+        xslt.Transform(inputFile, "Employees.xml");
 
-        // 2. Обрабатываем Employees.xml
+        // 2. Employees.xml → сотрудники
         var doc = XDocument.Load("Employees.xml");
         var employees = doc.Descendants("Employee").ToList();
-
         var list = new List<EmployeeView>();
 
-        // Группируем по имени+фамилии
         var grouped = employees
             .GroupBy(emp => new
             {
@@ -42,17 +57,15 @@ namespace xslt_GUI
 
         foreach (var group in grouped)
         {
-          // 🔧 Суммируем salary из вложенных <amount>
           var sum = group
-              .SelectMany(emp => emp.Elements("amount")) // берём все <amount> внутри сотрудника
+              .SelectMany(emp => emp.Elements("amount"))
               .Sum(amount => decimal.Parse(
                   amount.Attribute("salary")?.Value.Replace(',', '.') ?? "0",
                   CultureInfo.InvariantCulture));
 
-          // Добавляем атрибут totalSalary
-          group.First().SetAttributeValue("totalSalary", sum.ToString(CultureInfo.InvariantCulture));
+          group.First().SetAttributeValue("totalSalary",
+              sum.ToString(CultureInfo.InvariantCulture));
 
-          // Добавляем в список для UI
           list.Add(new EmployeeView
           {
             Name = group.Key.Name,
@@ -63,8 +76,8 @@ namespace xslt_GUI
 
         doc.Save("Employees.xml");
 
-        // 3. Обновляем Data1.xml (сумма всех amount в Pay)
-        var doc2 = XDocument.Load("Data1.xml");
+        // 3. Обновляем исходный файл
+        var doc2 = XDocument.Load(inputFile);
         var payElement = doc2.Element("Pay");
 
         if (payElement != null)
@@ -75,18 +88,21 @@ namespace xslt_GUI
                   item.Attribute("amount")?.Value.Replace(',', '.') ?? "0",
                   CultureInfo.InvariantCulture));
 
-          payElement.SetAttributeValue("totalAmount", totalAmount.ToString(CultureInfo.InvariantCulture));
+          payElement.SetAttributeValue("totalAmount",
+              totalAmount.ToString(CultureInfo.InvariantCulture));
         }
-        doc2.Save("Data1.xml");
+        doc2.Save(inputFile);
 
-        // 4. Вывод в DataGrid
+        // 4. Вывод в ОДНУ таблицу
         grid.ItemsSource = list;
 
-        MessageBox.Show("Готово!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+        MessageBox.Show($"✅ Готово!\nОбработан файл: {Path.GetFileName(inputFile)}", "Успех",
+            MessageBoxButton.OK, MessageBoxImage.Information);
       }
       catch (Exception ex)
       {
-        MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show($"❌ Ошибка:\n{ex.Message}", "Ошибка",
+            MessageBoxButton.OK, MessageBoxImage.Error);
       }
     }
 
