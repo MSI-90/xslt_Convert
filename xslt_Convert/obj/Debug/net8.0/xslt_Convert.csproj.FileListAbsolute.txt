@@ -12,3 +12,4 @@ F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\obj\De
 F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\obj\Debug\net8.0\xslt_Convert.pdb
 F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\obj\Debug\net8.0\xslt_Convert.genruntimeconfig.cache
 F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\obj\Debug\net8.0\ref\xslt_Convert.dll
+F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\obj\Debug\net8.0\xslt_Convert.sourcelink.json

@@ -1,9 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Employees>
-  <Employee name="Lena" surname="Ivanova" amount="1001.1" month="march" />
-  <Employee name="Lena" surname="Ivanova" amount="2001" month="january" />
-  <Employee name="Lena" surname="Ivanova" amount="3001,10" month="february" />
-  <Employee name="Masha" surname="Ivanova" amount="1000" month="march" />
-  <Employee name="Masha" surname="Ivanova" amount="2000.0" month="january" />
-  <Employee name="Masha" surname="Ivanova" amount="3000" month="february" />
+  <Employee name="Lena" surname="Ivanova">
+    <amount salary="1001.1" month="march" />
+    <amount salary="2001" month="january" />
+    <amount salary="3001,10" month="february" />
+  </Employee>
+  <Employee name="Masha" surname="Ivanova">
+    <amount salary="1000" month="march" />
+    <amount salary="2000.0" month="january" />
+    <amount salary="3000" month="february" />
+  </Employee>
 </Employees>

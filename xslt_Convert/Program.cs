@@ -28,7 +28,7 @@ namespace xslt_Convert
           return;
         }
         // Проверяем, существует ли файл XML для преобразования
-        if (!File.Exists("Data1.xml"))
+        if (!File.Exists("Data2.xml"))
         {
           Console.WriteLine("Ошибка: Файл Data1.xml не найден.");
           return;
