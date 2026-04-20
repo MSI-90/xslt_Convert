@@ -58,10 +58,10 @@ namespace xslt_GUI
         foreach (var group in grouped)
         {
           var sum = group
-              .SelectMany(emp => emp.Elements("amount"))
-              .Sum(amount => decimal.Parse(
-                  amount.Attribute("salary")?.Value.Replace(',', '.') ?? "0",
-                  CultureInfo.InvariantCulture));
+            .SelectMany(emp => emp.Elements("salary")) 
+            .Sum(sal => decimal.Parse(
+              sal.Attribute("amount")?.Value.Replace(',', '.') ?? "0",
+              CultureInfo.InvariantCulture));
 
           group.First().SetAttributeValue("totalSalary",
               sum.ToString(CultureInfo.InvariantCulture));
@@ -93,17 +93,16 @@ namespace xslt_GUI
         grid.ItemsSource = list;
 
         // Вывод: по месяцам (в TextBlock)
-        var byMonth = doc.Descendants("amount")
-            .GroupBy(a => a.Attribute("month")?.Value)
-            .Select(g => new
-            {
-              Month = g.Key,
-              Total = g.Sum(a => decimal.Parse(
-                  a.Attribute("salary")?.Value.Replace(',', '.') ?? "0",
-                  CultureInfo.InvariantCulture))
-            })
-            .OrderBy(x => x.Month)
-            .ToList();
+        var byMonth = doc.Descendants("salary")
+          .GroupBy(s => s.Attribute("mount")?.Value)
+          .Select(g => new {
+            Month = g.Key,
+            Total = g.Sum(s => decimal.Parse(
+              s.Attribute("amount")?.Value.Replace(',', '.') ?? "0",
+              CultureInfo.InvariantCulture))
+          })
+          .OrderBy(x => x.Month)
+          .ToList();
 
         var sb = new System.Text.StringBuilder();
         sb.AppendLine("Выплаты по месяцам:");
@@ -113,7 +112,7 @@ namespace xslt_GUI
         }
         monthlyTotals.Text = sb.ToString();
 
-        MessageBox.Show($"✅ Готово!\nФайл: {Path.GetFileName(inputFile)}", "Успех",
+        MessageBox.Show($"Готово!\nФайл: {Path.GetFileName(inputFile)}", "Успех",
             MessageBoxButton.OK, MessageBoxImage.Information);
       }
       catch (Exception ex)
