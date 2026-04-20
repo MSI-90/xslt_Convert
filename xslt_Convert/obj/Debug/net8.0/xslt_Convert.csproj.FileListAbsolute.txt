@@ -1,0 +1,14 @@
+F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\obj\Debug\net8.0\xslt_Convert.GeneratedMSBuildEditorConfig.editorconfig
+F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\obj\Debug\net8.0\xslt_Convert.AssemblyInfoInputs.cache
+F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\obj\Debug\net8.0\xslt_Convert.AssemblyInfo.cs
+F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\obj\Debug\net8.0\xslt_Convert.csproj.CoreCompileInputs.cache
+F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\bin\Debug\net8.0\xslt_Convert.exe
+F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\bin\Debug\net8.0\xslt_Convert.deps.json
+F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\bin\Debug\net8.0\xslt_Convert.runtimeconfig.json
+F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\bin\Debug\net8.0\xslt_Convert.dll
+F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\bin\Debug\net8.0\xslt_Convert.pdb
+F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\obj\Debug\net8.0\xslt_Convert.dll
+F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\obj\Debug\net8.0\refint\xslt_Convert.dll
+F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\obj\Debug\net8.0\xslt_Convert.pdb
+F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\obj\Debug\net8.0\xslt_Convert.genruntimeconfig.cache
+F:\Тестовое_реформатор\task_1\xslt_Convert\xslt_Convert\obj\Debug\net8.0\ref\xslt_Convert.dll
