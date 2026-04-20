@@ -42,7 +42,7 @@ namespace xslt_GUI
         xslt.Load("transform.xslt");
         xslt.Transform(inputFile, "Employees.xml");
 
-        // 2. Employees.xml → сотрудники
+        // 2. Сотрудники
         var doc = XDocument.Load("Employees.xml");
         var employees = doc.Descendants("Employee").ToList();
         var list = new List<EmployeeView>();
@@ -73,35 +73,52 @@ namespace xslt_GUI
             Total = sum
           });
         }
-
         doc.Save("Employees.xml");
 
-        // 3. Обновляем исходный файл
+        // 3. Исходный файл
         var doc2 = XDocument.Load(inputFile);
-        var payElement = doc2.Element("Pay");
-
-        if (payElement != null)
+        var pay = doc2.Element("Pay");
+        if (pay != null)
         {
-          var totalAmount = payElement
-              .Descendants("item")
-              .Sum(item => decimal.Parse(
-                  item.Attribute("amount")?.Value.Replace(',', '.') ?? "0",
+          var total = pay.Descendants("item")
+              .Sum(i => decimal.Parse(
+                  i.Attribute("amount")?.Value.Replace(',', '.') ?? "0",
                   CultureInfo.InvariantCulture));
-
-          payElement.SetAttributeValue("totalAmount",
-              totalAmount.ToString(CultureInfo.InvariantCulture));
+          pay.SetAttributeValue("totalAmount",
+              total.ToString(CultureInfo.InvariantCulture));
         }
         doc2.Save(inputFile);
 
-        // 4. Вывод в ОДНУ таблицу
+        // 4. Вывод: сотрудники
         grid.ItemsSource = list;
 
-        MessageBox.Show($"✅ Готово!\nОбработан файл: {Path.GetFileName(inputFile)}", "Успех",
+        // Вывод: по месяцам (в TextBlock)
+        var byMonth = doc.Descendants("amount")
+            .GroupBy(a => a.Attribute("month")?.Value)
+            .Select(g => new
+            {
+              Month = g.Key,
+              Total = g.Sum(a => decimal.Parse(
+                  a.Attribute("salary")?.Value.Replace(',', '.') ?? "0",
+                  CultureInfo.InvariantCulture))
+            })
+            .OrderBy(x => x.Month)
+            .ToList();
+
+        var sb = new System.Text.StringBuilder();
+        sb.AppendLine("Выплаты по месяцам:");
+        foreach (var m in byMonth)
+        {
+          sb.AppendLine($"• {m.Month}: {m.Total:N2}");
+        }
+        monthlyTotals.Text = sb.ToString();
+
+        MessageBox.Show($"✅ Готово!\nФайл: {Path.GetFileName(inputFile)}", "Успех",
             MessageBoxButton.OK, MessageBoxImage.Information);
       }
       catch (Exception ex)
       {
-        MessageBox.Show($"❌ Ошибка:\n{ex.Message}", "Ошибка",
+        MessageBox.Show($"Ошибка:\n{ex.Message}", "Ошибка",
             MessageBoxButton.OK, MessageBoxImage.Error);
       }
     }
