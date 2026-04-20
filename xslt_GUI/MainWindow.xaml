@@ -8,7 +8,9 @@
         Title="MainWindow" Height="450" Width="600"
         MinHeight="250" MinWidth="200">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
-        <DataGrid x:Name="grid" Margin="10,50,10,10"/>
+        <Button Content="Обработать" HorizontalAlignment="Left" Margin="18,65,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <DataGrid x:Name="grid" Margin="10,100,10,10"/>
+        <Button Content="Выбрать файл для преобразования" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.601,-0.108" Width="213" Click="Button_Click"/>
+        <TextBox x:Name="filePathTextBox" HorizontalAlignment="Left" Margin="279,12,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="281"/>
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using Microsoft.Win32;
+using System.Globalization;
 using System.Windows;
 using System.Xml.Linq;
 using System.Xml.Xsl;
@@ -86,6 +87,22 @@ namespace xslt_GUI
       catch (Exception ex)
       {
         MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+      }
+    }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+      var openFileDialog = new OpenFileDialog
+      {
+        Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*",
+        Title = "Выберите XML файл для обработки",
+        InitialDirectory = System.IO.Path.GetDirectoryName(
+                    System.Reflection.Assembly.GetExecutingAssembly().Location)
+      };
+
+      if (openFileDialog.ShowDialog() == true)
+      {
+        filePathTextBox.Text = openFileDialog.FileName;
       }
     }
   }
